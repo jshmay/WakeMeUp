@@ -1,5 +1,7 @@
 <resources>
 
     <string name="app_name">WakeMeUp</string>
+    <string name="main_activity__button__start__str">Start</string>
+    <string name="main_activity__button__stop__str">Stop</string>
 
 </resources>
