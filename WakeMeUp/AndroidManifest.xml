@@ -8,20 +8,25 @@
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="19" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/logo_trans"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         
-        <activity android:name="com.sunapps.wakemeup.MainActivity">
+        <activity android:name="com.sunapps.wakemeup.MainActivity"
+            	android:theme="@android:style/Theme.NoTitleBar">
              <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>           
         </activity>
-        <service android:name="com.sunapps.wakemeup.services.MainService"/>
+        <service android:name="com.sunapps.wakemeup.services.MainService" android:enabled="true" android:exported="false"/>
+        <activity android:name="com.sunapps.wakemeup.AlarmReceiverActivity"/>
     </application>
 
     

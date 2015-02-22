@@ -3,5 +3,19 @@
     <string name="app_name">WakeMeUp</string>
     <string name="main_activity__button__start__str">Start</string>
     <string name="main_activity__button__stop__str">Stop</string>
+    <string name="alarm_configuration__button__save__str">Save</string>
+    <string name="alarm_configuration__button__alarm_stop__str">Stop Alarm</string>
+    <string name="alarm_configuration__textview__time__str">Time:</string>
+    <string name="alarm_configuration__textview__snooze__str">Snooze:</string>
+    <string name="alarm_configuration__textview__vip__str">Vip Number:</string>
+    
+    <string name="alarm_preferences__vip">alarm_preferences__vip</string>
+    <string name="alarm_preferences__time">alarm_preferences__time</string>
+    <string name="alarm_preferences__snooze">alarm_preferences__snooze</string>
+    <string name="alarm_preferences__vipOccurrence">alarm_preferences__vipOccurrence</string>
+    <string name="alarm_preferences">alarm_preferences</string>
+
+    <string name="alarm_activity__button__ok__str">I\'m Awake</string>
+    <string name="alarm_activity__button__snooze__str">Snooze</string>
 
 </resources>

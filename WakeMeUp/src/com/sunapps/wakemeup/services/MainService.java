@@ -32,7 +32,7 @@ public class MainService extends Service {
 	}
 	
 	public void init(){
-		mPhoneStateListener = new MyPhoneStateListener(this, "01286689");
+		mPhoneStateListener = new MyPhoneStateListener(this);
 		mTelMger = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
 		mTelMger.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 	}
@@ -50,7 +50,7 @@ public class MainService extends Service {
 		Log.d(TAG,"In onStartCommand");
 		Toaster.print(this, "Received OnStartCMD");
 		
-		return super.onStartCommand(intent, flags, startId);
+		return START_STICKY;
 	}
 	
 	

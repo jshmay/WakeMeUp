@@ -2,7 +2,6 @@ package com.sunapps.wakemeup.util.listeners;
 
 
 import com.sunapps.wakemeup.services.MainService;
-import com.sunapps.wakemeup.util.Toaster;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,7 +21,7 @@ public class MainActivity_StopButtonListener implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		Log.w(TAG, "Stopping Service");
-		mCallerActivity.stopService(new Intent(mCallerActivity, MainService.class));
+		mCallerActivity.stopService(new Intent(mCallerActivity.getBaseContext(), MainService.class));
 	}
 
 }

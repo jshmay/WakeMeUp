@@ -2,7 +2,6 @@ package com.sunapps.wakemeup.util.listeners;
 
 
 import com.sunapps.wakemeup.services.MainService;
-import com.sunapps.wakemeup.util.Toaster;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,7 +21,7 @@ public class MainActivity_StartButtonListener implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		Log.w(TAG, "Starting Service");
-		mCallerActivity.startService(new Intent(mCallerActivity, MainService.class));
+		mCallerActivity.startService(new Intent(mCallerActivity.getBaseContext(), MainService.class));
 	}
 
 }
