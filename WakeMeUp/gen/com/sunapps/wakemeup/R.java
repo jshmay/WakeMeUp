@@ -22,17 +22,21 @@ public final class R {
     public static final class id {
         public static final int alarm_activity__button__ok=0x7f060001;
         public static final int alarm_activity__button__snooze=0x7f060000;
-        public static final int alarm_configuration__button__alarm_stop=0x7f060008;
-        public static final int alarm_configuration__button__save=0x7f060009;
-        public static final int alarm_configuration__editText__vip=0x7f060007;
+        public static final int alarm_configuration__button__alarm_stop=0x7f06000d;
+        public static final int alarm_configuration__button__save=0x7f06000c;
+        public static final int alarm_configuration__editText__alarmRingtone=0x7f060009;
+        public static final int alarm_configuration__editText__vip=0x7f06000b;
         public static final int alarm_configuration__numberpicker__snooze=0x7f060005;
         public static final int alarm_configuration__numberpicker__time=0x7f060003;
+        public static final int alarm_configuration__numberpicker__vipOccurenceLimit=0x7f060007;
+        public static final int alarm_configuration__textview__alarmRingtone=0x7f060008;
+        public static final int alarm_configuration__textview__occurrenceLimit=0x7f060006;
         public static final int alarm_configuration__textview__snooze=0x7f060004;
         public static final int alarm_configuration__textview__time=0x7f060002;
-        public static final int alarm_configuration__textview__vip=0x7f060006;
-        public static final int main_activity__button__start=0x7f06000b;
-        public static final int main_activity__button__stop=0x7f06000a;
-        public static final int vpPager=0x7f06000c;
+        public static final int alarm_configuration__textview__vip=0x7f06000a;
+        public static final int main_activity__button__start=0x7f06000f;
+        public static final int main_activity__button__stop=0x7f06000e;
+        public static final int vpPager=0x7f060010;
     }
     public static final class layout {
         public static final int alam_activity_layout=0x7f030000;
@@ -41,18 +45,30 @@ public final class R {
         public static final int main_activity_layout=0x7f030003;
     }
     public static final class string {
-        public static final int alarm_activity__button__ok__str=0x7f04000d;
-        public static final int alarm_activity__button__snooze__str=0x7f04000e;
+        public static final int alarm_activity__button__ok__str=0x7f040019;
+        public static final int alarm_activity__button__snooze__str=0x7f04001a;
         public static final int alarm_configuration__button__alarm_stop__str=0x7f040004;
         public static final int alarm_configuration__button__save__str=0x7f040003;
+        public static final int alarm_configuration__textview__alarmRingtone__str=0x7f040009;
         public static final int alarm_configuration__textview__snooze__str=0x7f040006;
         public static final int alarm_configuration__textview__time__str=0x7f040005;
+        public static final int alarm_configuration__textview__vipOccurenceLimit__str=0x7f040008;
         public static final int alarm_configuration__textview__vip__str=0x7f040007;
-        public static final int alarm_preferences=0x7f04000c;
-        public static final int alarm_preferences__snooze=0x7f04000a;
-        public static final int alarm_preferences__time=0x7f040009;
-        public static final int alarm_preferences__vip=0x7f040008;
-        public static final int alarm_preferences__vipOccurrence=0x7f04000b;
+        public static final int alarm_preferences=0x7f040018;
+        public static final int alarm_preferences__alarmTone=0x7f04000d;
+        public static final int alarm_preferences__alarmToneTemp=0x7f04000e;
+        public static final int alarm_preferences__snooze=0x7f04000c;
+        public static final int alarm_preferences__time=0x7f04000b;
+        public static final int alarm_preferences__vip=0x7f04000a;
+        public static final int alarm_preferences__vipOccurrence=0x7f04000f;
+        public static final int alarm_preferences__vipOccurrenceLimit=0x7f040010;
+        public static final int alarm_preferences__vip_callTime=0x7f040013;
+        public static final int alarm_preferences__vip_contactList=0x7f040014;
+        public static final int alarm_preferences__vip_contactListTemp=0x7f040017;
+        public static final int alarm_preferences__vip_id=0x7f040011;
+        public static final int alarm_preferences__vip_idTemp=0x7f040015;
+        public static final int alarm_preferences__vip_name=0x7f040012;
+        public static final int alarm_preferences__vip_nameTemp=0x7f040016;
         public static final int app_name=0x7f040000;
         public static final int main_activity__button__start__str=0x7f040001;
         public static final int main_activity__button__stop__str=0x7f040002;

@@ -5,11 +5,16 @@ import com.sunapps.wakemeup.data.AlarmData;
 import com.sunapps.wakemeup.internal.DataHandler;
 import com.sunapps.wakemeup.util.listeners.AlarmActivityConfig_StopAlarmButtonListener;
 import com.sunapps.wakemeup.util.listeners.AlarmActivityConfig_SaveButtonListener;
+import com.sunapps.wakemeup.util.listeners.AlarmConfigurationTab_AlarmPickerEditTextListener;
 import com.sunapps.wakemeup.util.listeners.AlarmConfigurationTab_VipEditTextListener;
 import com.sunapps.wakemeup.util.listeners.MainActivity_StartButtonListener;
 import com.sunapps.wakemeup.util.listeners.MainActivity_StopButtonListener;
 
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.media.audiofx.BassBoost.Settings;
 import android.os.Bundle;
+import android.provider.Settings.System;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 
 public class TabbedFragment extends Fragment{
     // Store instance variables
@@ -58,13 +64,26 @@ public class TabbedFragment extends Fragment{
 		almButton.setOnClickListener(new AlarmActivityConfig_StopAlarmButtonListener(getActivity()));
 				
 		AlarmData ad = DataHandler.fetchAlarmConfig(getActivity());
-		EditText npTime = (EditText)view.findViewById(R.id.alarm_configuration__numberpicker__time);
-		npTime.setText(ad.getTime());
+		NumberPicker npTime = (NumberPicker)view.findViewById(R.id.alarm_configuration__numberpicker__time);
+		npTime.setValue(Integer.parseInt(ad.getTime()));
 		EditText npSnooze = (EditText)view.findViewById(R.id.alarm_configuration__numberpicker__snooze);
 		npSnooze.setText(ad.getSnooze());
-		EditText tvVip = (EditText)view.findViewById(R.id.alarm_configuration__editText__vip);
-		tvVip.setText(DataHandler.fetchVipPhoneNumber(getActivity()));
-		tvVip.setOnTouchListener(new AlarmConfigurationTab_VipEditTextListener(getActivity()));
+		
+		EditText npVipOccurenceLimit = (EditText)view.findViewById(R.id.alarm_configuration__numberpicker__vipOccurenceLimit);
+		Log.w(TAG,"npVipOccurenceLimit["+(npVipOccurenceLimit==null)+"]");
+		npVipOccurenceLimit.setText(""+DataHandler.fetchVipOccurrenceLimit(getActivity()));		
+		EditText etVip = (EditText)view.findViewById(R.id.alarm_configuration__editText__vip);
+		etVip.setText(DataHandler.fetchVipDetails(getActivity()).getName());
+		etVip.setOnTouchListener(new AlarmConfigurationTab_VipEditTextListener(getActivity()));
+		
+		Ringtone ringtone = RingtoneManager.getRingtone(getActivity(), RingtoneManager.getActualDefaultRingtoneUri(getActivity(), RingtoneManager.TYPE_ALARM));
+		
+		Log.w(TAG,"initRingtone["+ringtone.getTitle(getActivity())+"]");
+		
+		EditText etAlarmRingtone = (EditText)view.findViewById(R.id.alarm_configuration__editText__alarmRingtone);
+		etAlarmRingtone.setText(ringtone.getTitle(getActivity()));
+		etAlarmRingtone.setOnTouchListener(new AlarmConfigurationTab_AlarmPickerEditTextListener(getActivity()));
+		
 		Log.v(TAG, "Init initAlarmScreen completed");
 	}
     

@@ -2,8 +2,10 @@ package com.sunapps.wakemeup.util.listeners;
 
 import com.sunapps.wakemeup.AlarmReceiverActivity;
 import com.sunapps.wakemeup.data.AlarmData;
+import com.sunapps.wakemeup.data.VipData;
 import com.sunapps.wakemeup.internal.DataHandler;
 import com.sunapps.wakemeup.util.Toaster;
+import com.sunapps.wakemeup.util.Validator;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -23,7 +25,6 @@ public class MyPhoneStateListener extends PhoneStateListener{
 	long ringStart=0;
 	
 	String mCallerPhoneNumber="";
-	String mCurrentVipPhoneNumber="";
 	
 	int missedCallsFromVip=0;
 	
@@ -32,25 +33,20 @@ public class MyPhoneStateListener extends PhoneStateListener{
 	public MyPhoneStateListener (Context context){
 		resetRingData();
 		mContext=context;
-		mCurrentVipPhoneNumber="";
 	}
 	
 	public void resetRingData(){
 		mRing=false;
 		mAnswered=false;
 		ringStart=0;
-		missedCallsFromVip=0;	
 		Log.d(TAG,"ring data reset");
 	}
 	
 	@Override
 	public void onCallStateChanged(int state, String incomingNumber) {
 		
-		String vipPhoneNumber=DataHandler.fetchVipPhoneNumber(mContext);
-		if(!mCurrentVipPhoneNumber.equals(vipPhoneNumber)){//If vip number is new reset data for this number
-			mCurrentVipPhoneNumber=vipPhoneNumber;
-			resetRingData();
-		}
+		VipData vip=DataHandler.fetchVipDetails(mContext);
+		int npOccurrence = DataHandler.fetchVipOccurrenceLimit(mContext);
 		
         if(state==TelephonyManager.CALL_STATE_RINGING)
         {
@@ -62,7 +58,7 @@ public class MyPhoneStateListener extends PhoneStateListener{
         }
         else if(state==TelephonyManager.CALL_STATE_OFFHOOK)
         {
-        	if(mCallerPhoneNumber.equals(vipPhoneNumber)){
+        	if(Validator.isValidVipContactNumber(mCallerPhoneNumber, vip.getContactList())){
         		Log.w(TAG,"Phone call came from VIP and has been answered");
         	}
         	mRing=false;
@@ -72,32 +68,36 @@ public class MyPhoneStateListener extends PhoneStateListener{
         {
         	Log.d(TAG,"In Idle State");
         	// If phone was ringing(ring=true) and not received(callReceived=false) , then it is a missed call
-        	if(mRing&&!mAnswered&&PhoneNumberUtils.compare(mCallerPhoneNumber, vipPhoneNumber))
+        	if(mRing&&!mAnswered&&Validator.isValidVipContactNumber(mCallerPhoneNumber, vip.getContactList()))
         	{
-            	long totalRingTime=System.currentTimeMillis()-ringStart;
-            	
-            	if(totalRingTime<40000&&false){//TODO: Remove the false note here
-            		//You rejected the call
-            		Log.w(TAG,"Manual VIP rejection for : ["+mCallerPhoneNumber+"]");
-            		missedCallsFromVip=0;
-            		DataHandler.saveVipOccurence(mContext, missedCallsFromVip);
-            	}else{
-            		missedCallsFromVip=DataHandler.incrementVipOccurence(mContext);
-            		if(missedCallsFromVip>=2){
-            			Log.w(TAG,"VIP Missed Calls reached limit of ["+missedCallsFromVip+"] initiate emergency alarm");
-            			//StartAlarm
-            			createAlarm();
-            			missedCallsFromVip=0;
-            			DataHandler.saveVipOccurence(mContext, missedCallsFromVip);
-            		}else{
-                		Log.w(TAG,"It was A VIP MISSED CALL from : ["+mCallerPhoneNumber+"] It happened ["+missedCallsFromVip+"] time(s)");
-                		Toaster.print(mContext,"It was A VIP MISSED CALL from : ["+mCallerPhoneNumber+"] It happened ["+missedCallsFromVip+"] time(s)");              			
-            		}
-            	}
+        		if(System.currentTimeMillis()-DataHandler.fetchLastVipCallTime(mContext)>180000)
+        		{
+        			missedCallsFromVip=0;
+        			DataHandler.saveVipOccurence(mContext, missedCallsFromVip);
+        			Log.w(TAG,"Passed 3 minutes limit");
+        		}
+        		
+        		DataHandler.saveLastVipCallTime(mContext,System.currentTimeMillis());
+        		
+        		missedCallsFromVip=DataHandler.incrementVipOccurence(mContext);
+        		
+        		if(missedCallsFromVip>=npOccurrence){
+        			Log.w(TAG,"VIP Missed Calls reached limit of ["+missedCallsFromVip+"] initiate emergency alarm");
+        			//StartAlarm
+        			createAlarm();
+        			missedCallsFromVip=0;
+        			DataHandler.saveVipOccurence(mContext, missedCallsFromVip);
+        		}else{
+            		Log.w(TAG,"It was A VIP MISSED CALL from : ["+mCallerPhoneNumber+"] It happened ["+missedCallsFromVip+"] time(s)");
+            		Toaster.print(mContext,"It was A VIP MISSED CALL from : ["+mCallerPhoneNumber+"] It happened ["+missedCallsFromVip+"] time(s)");              			
+        		}
+        		
+        		DataHandler.saveLastVipCallTime(mContext,System.currentTimeMillis());
+        	
         	}else if(mRing&&!mAnswered){
         		Log.w(TAG,"It was A normal missed CALL from : ["+mCallerPhoneNumber+"]");
         		//Toaster.print(mContext,"It was A normal missed CALL from : ["+mCallerPhoneNumber+"]");
-        	}else if(!mRing&&mAnswered&&PhoneNumberUtils.compare(mCallerPhoneNumber, vipPhoneNumber)){
+        	}else if(!mRing&&mAnswered&&Validator.isValidVipContactNumber(mCallerPhoneNumber, vip.getContactList())){
         		Log.w(TAG,"You answered CALL from : ["+mCallerPhoneNumber+"]");
         		missedCallsFromVip=0;
         		DataHandler.saveVipOccurence(mContext, missedCallsFromVip);

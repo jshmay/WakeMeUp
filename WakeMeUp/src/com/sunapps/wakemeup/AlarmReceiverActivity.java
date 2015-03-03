@@ -44,7 +44,7 @@ import android.widget.Button;
 		if(mVibrator.hasVibrator())
 			mVibrator.vibrate(pattern,0);
 	}
-	private Uri getAlarmUri() {
+	public static Uri getAlarmUri() {
 		
 		Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
 		if(alert==null)

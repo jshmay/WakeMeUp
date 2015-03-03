@@ -44,7 +44,7 @@ public class AlarmActivityConfig_StopAlarmButtonListener implements OnClickListe
 		AlarmManager am = (AlarmManager)mCallerActivity.getSystemService(Context.ALARM_SERVICE);
 		am.cancel(pi);
 		//reset phone state listener
-		DataHandler.saveVipOccurence(mCallerActivity, 0);
+		DataHandler.resetState(mCallerActivity);
 		Toaster.print(mCallerActivity, "Alarm has been cancelled");
 	}
 
