@@ -60,6 +60,7 @@ import android.widget.Button;
 			mMediaPlayer.setDataSource(context, alertUri);
 			
 			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+			mMediaPlayer.setLooping(true);
 			mMediaPlayer.prepare();
 			mMediaPlayer.start();
 			Log.v(TAG, "Sound Started");

@@ -58,7 +58,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/alarm_configuration__numberpicker__vipOccurenceLimit"
         android:layout_toRightOf="@+id/alarm_configuration__textview__alarmRingtone"
-        android:inputType="phone" />
+        android:inputType="phone"/>
     
     <TextView 
         android:id="@+id/alarm_configuration__textview__vip"

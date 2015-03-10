@@ -64,8 +64,8 @@ public class TabbedFragment extends Fragment{
 		almButton.setOnClickListener(new AlarmActivityConfig_StopAlarmButtonListener(getActivity()));
 				
 		AlarmData ad = DataHandler.fetchAlarmConfig(getActivity());
-		NumberPicker npTime = (NumberPicker)view.findViewById(R.id.alarm_configuration__numberpicker__time);
-		npTime.setValue(Integer.parseInt(ad.getTime()));
+		EditText npTime = (EditText)view.findViewById(R.id.alarm_configuration__numberpicker__time);
+		npTime.setText(ad.getTime());
 		EditText npSnooze = (EditText)view.findViewById(R.id.alarm_configuration__numberpicker__snooze);
 		npSnooze.setText(ad.getSnooze());
 		
