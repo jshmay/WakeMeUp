@@ -11,7 +11,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -70,11 +69,12 @@ public class MyPhoneStateListener extends PhoneStateListener{
         	// If phone was ringing(ring=true) and not received(callReceived=false) , then it is a missed call
         	if(mRing&&!mAnswered&&Validator.isValidVipContactNumber(mCallerPhoneNumber, vip.getContactList()))
         	{
-        		if(System.currentTimeMillis()-DataHandler.fetchLastVipCallTime(mContext)>180000)
+
+        		if(System.currentTimeMillis()-DataHandler.fetchLastVipCallTime(mContext)>300000)
         		{
         			missedCallsFromVip=0;
         			DataHandler.saveVipOccurence(mContext, missedCallsFromVip);
-        			Log.w(TAG,"Passed 3 minutes limit");
+        			Log.w(TAG,"Passed 5 minutes limit");
         		}
         		
         		DataHandler.saveLastVipCallTime(mContext,System.currentTimeMillis());
@@ -89,11 +89,11 @@ public class MyPhoneStateListener extends PhoneStateListener{
         			DataHandler.saveVipOccurence(mContext, missedCallsFromVip);
         		}else{
             		Log.w(TAG,"It was A VIP MISSED CALL from : ["+mCallerPhoneNumber+"] It happened ["+missedCallsFromVip+"] time(s)");
-            		Toaster.print(mContext,"It was A VIP MISSED CALL from : ["+mCallerPhoneNumber+"] It happened ["+missedCallsFromVip+"] time(s)");              			
+            		//Toaster.print(mContext,"It was A VIP MISSED CALL from : ["+mCallerPhoneNumber+"] It happened ["+missedCallsFromVip+"] time(s)");              			
         		}
         		
         		DataHandler.saveLastVipCallTime(mContext,System.currentTimeMillis());
-        	
+    	
         	}else if(mRing&&!mAnswered){
         		Log.w(TAG,"It was A normal missed CALL from : ["+mCallerPhoneNumber+"]");
         		//Toaster.print(mContext,"It was A normal missed CALL from : ["+mCallerPhoneNumber+"]");
@@ -115,8 +115,8 @@ public class MyPhoneStateListener extends PhoneStateListener{
 	private void createAlarm() {
 		Log.v(TAG, "Setting Alarm");
 		AlarmData ad = DataHandler.fetchAlarmConfig(mContext);
-		String alarmStartTime = ad.getTime()==null?"1":ad.getTime();
-		int alarmStartTimeNumb = Integer.parseInt(alarmStartTime);
+		int alarmStartTime = ad.getTime();
+		int alarmStartTimeNumb = alarmStartTime;
 		
 		Intent i = new Intent(mContext, AlarmReceiverActivity.class);
 		PendingIntent pi = PendingIntent.getActivity(mContext, 2, i, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -125,5 +125,4 @@ public class MyPhoneStateListener extends PhoneStateListener{
 		Toaster.print(mContext, "Alarm has been set");
 	}
 	
-
 }

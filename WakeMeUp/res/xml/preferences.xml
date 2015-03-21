@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:example="http://schemas.android.com/apk/lib/com.sunapps.wakemeup.util.preferences.NumberPickerPreference">
+	<PreferenceCategory 
+	    android:title="Service"
+    >
+    	<com.sunapps.wakemeup.util.preferences.ToggleAlarmPreference
+    		android:title="Activate Service"
+    		android:key="@string/alarm_preferences__toggleService"
+    		android:summary="Start WakeMeUp application"
+    	/> 	    
+	</PreferenceCategory>	
+	<PreferenceCategory
+		android:title="Call Settings"
+		android:summary="Call related options"   
+	>
+	    <com.sunapps.wakemeup.util.preferences.NumberPickerPreference
+	        android:key="@string/alarm_preferences__vipOccurrenceLimit"
+		    android:title="Number of missed calls"
+		    android:summary="Set the number of times that the vip contact will have to call before the alarm is set"
+	        android:defaultValue="2"
+	        example:maxValue="10"
+	        example:minValue="1"
+	    />	
+		<com.sunapps.wakemeup.util.preferences.ContactListPickerPreference
+		    android:key="alarm_preferences__vip_name"
+		    android:title="Vip Contact"
+		    android:summary="Select the contact who will trigger your phone alarm"
+		/>	    
+	</PreferenceCategory>	
+	<PreferenceCategory 
+	    android:title="Alarm Settings"
+    	android:summary="Alarm related options"
+    >
+		<RingtonePreference
+		    android:key="@string/alarm_preferences__alarmTone"
+		    android:title="Alarm Tone"    
+		    android:summary="Choose the alarm tone"
+		    android:ringtoneType="alarm"
+		    android:showDefault="true"
+		/>
+	
+	    <com.sunapps.wakemeup.util.preferences.NumberPickerPreference
+	        android:key="@string/alarm_preferences__time"
+		    android:title="Alarm Time"
+		    android:summary="Set the number of minutes that will pass before the alarm is triggered"
+	        android:defaultValue="5"
+	        example:maxValue="60"
+	        example:minValue="1"
+	    />		
+	    <com.sunapps.wakemeup.util.preferences.NumberPickerPreference
+	        android:key="@string/alarm_preferences__snooze"
+	        android:title="Snooze Time"
+	        android:summary="Set the number of minutes before an alarm is triggered again"
+	        android:defaultValue="5"
+	        example:maxValue="60"
+	        example:minValue="1"
+	    />			
+	    	    
+	</PreferenceCategory>
+</PreferenceScreen>

@@ -43,8 +43,8 @@ public class AlarmActivity_SnoozeButtonListener implements OnClickListener{
 	
 	private void snoozeAlarm() {
 		AlarmData ad = DataHandler.fetchAlarmConfig(mCallerActivity);
-		String snoozeStartTime = ad.getSnooze()==null?"1":ad.getSnooze();
-		int snoozeStartTimeNumb = Integer.parseInt(snoozeStartTime);
+		int snoozeStartTime = ad.getSnooze();
+		int snoozeStartTimeNumb = snoozeStartTime;
 		
 		Intent i = new Intent(mCallerActivity, AlarmReceiverActivity.class);
 		PendingIntent pi = PendingIntent.getActivity(mCallerActivity, 2, i, PendingIntent.FLAG_CANCEL_CURRENT);

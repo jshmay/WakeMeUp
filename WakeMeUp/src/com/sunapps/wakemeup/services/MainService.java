@@ -1,6 +1,8 @@
 package com.sunapps.wakemeup.services;
 
-import com.sunapps.wakemeup.util.Toaster;
+import com.sunapps.wakemeup.data.AlarmData;
+import com.sunapps.wakemeup.data.VipData;
+import com.sunapps.wakemeup.internal.DataHandler;
 import com.sunapps.wakemeup.util.listeners.MyPhoneStateListener;
 
 import android.app.Service;
@@ -25,7 +27,6 @@ public class MainService extends Service {
 
 	@Override
 	public void onCreate() {
-		// TODO Auto-generated method stub
 		super.onCreate();
 		Log.d(TAG,"In onCreate");
 		init();
@@ -41,14 +42,24 @@ public class MainService extends Service {
 	public void onDestroy() {
 		super.onDestroy();
 		Log.d(TAG,"In onDestroy");
-		Toaster.print(this, "Received StopCMD");
 		mTelMger.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
 	}
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		Log.d(TAG,"In onStartCommand");
-		Toaster.print(this, "Received OnStartCMD");
+		Log.w(TAG,"All the data needed:");
+		VipData vp = DataHandler.fetchVipDetails(getApplicationContext());
+		Log.w(TAG,"VIP ["+vp.getId()+"] ["+vp.getName()+"] ["+vp.getContactList().size()+"]");
+		AlarmData ad = DataHandler.fetchAlarmConfig(getApplicationContext());
+		Log.w(TAG,"Alarm Config - Time["+ad.getTime()+"] Snooze["+ad.getSnooze()+"]");
+		String alarmTone = ""+DataHandler.fetchAlarmToneDetails(getApplicationContext());
+		Log.w(TAG,"Alarm Tone - Path["+alarmTone+"]");
+		int occurrence = DataHandler.fetchVipOccurence(getApplicationContext());
+		int occurrenceLimit = DataHandler.fetchVipOccurrenceLimit(getApplicationContext());
+		long lastVipCall = DataHandler.fetchLastVipCallTime(getApplicationContext());
+		Log.w(TAG,"VIP Calls - Calls["+occurrence+"] CallsLimit["+occurrenceLimit+"] CallsLast["+lastVipCall+"]");
+		Log.w(TAG,"All the data needed:");
 		
 		return START_STICKY;
 	}

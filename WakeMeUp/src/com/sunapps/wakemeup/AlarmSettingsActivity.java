@@ -6,7 +6,7 @@ import java.util.Set;
 import com.sunapps.wakemeup.data.VipData;
 import com.sunapps.wakemeup.fragments.SettingsFragment;
 import com.sunapps.wakemeup.internal.DataHandler;
-import com.sunapps.wakemeup.util.DialogHandler;
+import com.sunapps.wakemeup.util.Toaster;
 import com.sunapps.wakemeup.util.external.TelephoneCaller;
 import com.sunapps.wakemeup.util.preferences.ContactListPickerPreference;
 
@@ -20,33 +20,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
-public class MainActivity extends FragmentActivity {
-	public static final int VERSION = 3;
+public class AlarmSettingsActivity extends Activity{
+	
 	
 	public static String TAG = MainActivity.class.getSimpleName();
-	
 	private SettingsFragment mSFrag;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        int versionNumber = DataHandler.fetchVersionNumber(this);
-        boolean isFresh = DataHandler.fetchIsFreshInstallation(this);
-        
-        if(versionNumber!=VERSION){
-        	DataHandler.clearData(this);
-        	DataHandler.saveCurrentVersionNumber(this,VERSION);
-        }
-        if(isFresh){
-        	DialogHandler.printAlertDialog(this, "Tips", this.getString(R.string.app_tips));
-        	DataHandler.saveIsNotNewlyInstalled(this);
-        }
         
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
@@ -54,13 +38,9 @@ public class MainActivity extends FragmentActivity {
         mSFrag = new SettingsFragment();
         ft.replace(android.R.id.content,mSFrag);
         ft.commit();//I have a feeling this is wrong...why would we want to replace ?
+        
 	}
 	
-	@Override
-	protected void onDestroy() {
-		Log.v(TAG, "destroyed mainactivity");
-		super.onDestroy();
-	}
 	
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
 		super.onActivityResult(requestCode, resultCode, data);
@@ -111,30 +91,13 @@ public class MainActivity extends FragmentActivity {
     	    phones.close();
     	
     	    DataHandler.saveVipDetailsTemp(this, new VipData(contactName, contactId, contactList));//save temporary data to internal memory
-    	    //Toaster.print(this, "Fetched name: name["+contactName+"] & phone["+phoneNumber+"]");
+    	    Toaster.print(this, "Fetched name: name["+contactName+"] & phone["+phoneNumber+"]");
     	    ContactListPickerPreference clp = (ContactListPickerPreference)mSFrag.findPreference("alarm_preferences__vip_name");
     	    clp.getEditText().setText(contactName);
         
         }		
 	}
 	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    // Handle presses on the action bar items
-	    switch (item.getItemId()) {
-	        case R.id.mainActivity_menu_about:
-	        	DialogHandler.printAlertDialog(this,"About",this.getString(R.string.app_about));
-	            return true;
-	        default:
-	            return super.onOptionsItemSelected(item);
-	    }
-	}
 	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-	    // Inflate the menu items for use in the action bar
-	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.menu, menu);
-	    return super.onCreateOptionsMenu(menu);
-	}
+	
 }

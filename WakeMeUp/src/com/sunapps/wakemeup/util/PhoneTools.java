@@ -1,8 +1,5 @@
 package com.sunapps.wakemeup.util;
 
-import com.sunapps.wakemeup.util.listeners.MainActivity_StartButtonListener;
-
-import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.ContactsContract;

@@ -1,6 +1,5 @@
 package com.sunapps.wakemeup.data;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class VipData {

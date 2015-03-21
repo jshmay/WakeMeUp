@@ -2,8 +2,6 @@ package com.sunapps.wakemeup.util.listeners;
 
 
 import com.sunapps.wakemeup.AlarmReceiverActivity;
-import com.sunapps.wakemeup.R;
-import com.sunapps.wakemeup.data.AlarmData;
 import com.sunapps.wakemeup.internal.DataHandler;
 import com.sunapps.wakemeup.util.Toaster;
 
@@ -15,7 +13,6 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.EditText;
 
 public class AlarmActivityConfig_StopAlarmButtonListener implements OnClickListener{
 	public static String TAG = AlarmActivityConfig_StopAlarmButtonListener.class.getSimpleName();

@@ -1,23 +1,23 @@
 package com.sunapps.wakemeup.data;
 
 public class AlarmData {
-	String mTime;
-	String mSnooze;
+	int mTime;
+	int mSnooze;
 	
-	public AlarmData(String alarmTime, String alarmSnooze) {
+	public AlarmData(int alarmTime, int alarmSnooze) {
 		mTime=alarmTime;
 		mSnooze=alarmSnooze;
 	}
-	public String getTime() {
+	public int getTime() {
 		return mTime;
 	}
-	public void setTime(String mTime) {
+	public void setTime(int mTime) {
 		this.mTime = mTime;
 	}
-	public String getSnooze() {
+	public int getSnooze() {
 		return mSnooze;
 	}
-	public void setSnooze(String mSnooze) {
+	public void setSnooze(int mSnooze) {
 		this.mSnooze = mSnooze;
 	}
 	

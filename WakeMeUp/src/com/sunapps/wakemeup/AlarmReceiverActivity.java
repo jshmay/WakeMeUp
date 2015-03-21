@@ -2,14 +2,12 @@ package com.sunapps.wakemeup;
 
 import java.io.IOException;
 
-import com.sunapps.wakemeup.util.external.TelephoneCaller;
+import com.sunapps.wakemeup.internal.DataHandler;
 import com.sunapps.wakemeup.util.listeners.AlarmActivity_OkButtonListener;
 import com.sunapps.wakemeup.util.listeners.AlarmActivity_SnoozeButtonListener;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
@@ -17,7 +15,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.Vibrator;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
@@ -35,7 +32,9 @@ import android.widget.Button;
 		super.onCreate(savedInstanceState);
 		Log.v(TAG, "In onCreate");
 		init();
-		playSound(this,getAlarmUri());
+		Uri alarmToneUri = DataHandler.fetchAlarmToneDetails(this);
+		if(!alarmToneUri.toString().equals(""))
+			playSound(this,alarmToneUri);
 		vibrate(this);
 	}
 	private void vibrate(Context context) {
@@ -52,18 +51,26 @@ import android.widget.Button;
 		if(alert==null)
 		alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
 		
+		
 		return alert;
 	}
 	private void playSound(Context context,	Uri alertUri) {
 		Log.v(TAG, "In playSound");
 		try {
-			mMediaPlayer.setDataSource(context, alertUri);
-			
-			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
-			mMediaPlayer.setLooping(true);
-			mMediaPlayer.prepare();
-			mMediaPlayer.start();
-			Log.v(TAG, "Sound Started");
+			if(alertUri!=null)
+			{
+				Log.w(TAG,"alertUri==null["+(alertUri==null)+"]   ["+(alertUri)+"]  context?["+(context==null)+"] mMediaPlayer?["+(mMediaPlayer==null)+"]");
+				
+				mMediaPlayer.setDataSource(context, alertUri);
+				mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+				mMediaPlayer.setLooping(true);
+				mMediaPlayer.prepare();
+				mMediaPlayer.start();
+				Log.v(TAG, "Sound Started");				
+			}else{
+				Log.w(TAG, "alertUri is null");	
+			}
+
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -72,10 +79,11 @@ import android.widget.Button;
 	
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void init() {
 		Log.v(TAG, "Started Init");
 		PowerManager pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
-		mWakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "My Wake Lock");
+		mWakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, "My Wake Lock");
 		mWakeLock.acquire();
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.getWindow().setFlags(

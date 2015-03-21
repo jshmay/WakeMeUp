@@ -1,16 +1,21 @@
 <resources>
 
     <string name="app_name">WakeMeUp</string>
+    <string name="app_tips">Be sure to set your contact name and alarm tone on your first time installing the app before you start the application</string>
+    <string name="app_about">This application was created by AppSomnia !\nYour opinion really matters to us so please let us know how we can improve it to suit your lifestyle.</string>
+    
+    <string name="version_number">version_number</string>
     <string name="main_activity__button__start__str">Start</string>
     <string name="main_activity__button__stop__str">Stop</string>
     <string name="alarm_configuration__button__save__str">Save</string>
     <string name="alarm_configuration__button__alarm_stop__str">Stop Alarm</string>
     <string name="alarm_configuration__textview__time__str">Time:</string>
     <string name="alarm_configuration__textview__snooze__str">Snooze:</string>
-    <string name="alarm_configuration__textview__vip__str">Vip Contact:</string>
+    <string name="alarm_configuration__textview__vip__str">VIP Contact:</string>
     <string name="alarm_configuration__textview__vipOccurenceLimit__str">Number of Calls before alarm is set:</string>
     <string name="alarm_configuration__textview__alarmRingtone__str">Alarm Tone:</string>
         
+    <string name="alarm_preferences__toggleService">alarm_preferences__toggleService</string>
     <string name="alarm_preferences__vip">alarm_preferences__vip</string>
     <string name="alarm_preferences__time">alarm_preferences__time</string>
     <string name="alarm_preferences__snooze">alarm_preferences__snooze</string>
@@ -33,4 +38,11 @@
     <string name="alarm_activity__button__ok__str">I\'m Awake</string>
     <string name="alarm_activity__button__snooze__str">Snooze</string>
 
+    <string name="mainActivity_menu_setAlarmPreferences_str">Alarm Settings</string>
+    <string name="mainActivity_menu_about_str">About</string>
+    <string name="mainActivity_menu_about_ok_str">About</string>
+    
+    <string name="alarmSettingsActivity_label_str">Settings</string>
+    
+    <string name="is_fresh">is_fresh</string>
 </resources>

@@ -24,7 +24,7 @@ public class AlarmActivityConfig_SaveButtonListener implements OnClickListener{
 	@Override
 	public void onClick(View view) {
 		
-		AlarmData ad=new AlarmData("1", "1");
+		AlarmData ad=new AlarmData(1, 1);
 		
 		EditText npTime = (EditText)mCallerActivity.findViewById(R.id.alarm_configuration__numberpicker__time);
 		EditText npSnooze = (EditText)mCallerActivity.findViewById(R.id.alarm_configuration__numberpicker__snooze);
@@ -43,8 +43,8 @@ public class AlarmActivityConfig_SaveButtonListener implements OnClickListener{
 		if(npOccurrenceNum==0)
 			npOccurrenceNum=1;
 		
-		ad.setTime(npTimeNum+"");
-		ad.setSnooze(npSnoozeNum+"");
+		ad.setTime(npTimeNum);
+		ad.setSnooze(npSnoozeNum);
 		
 		Log.w(TAG, "Saving Data ["+ad.getTime()+"] ["+ad.getSnooze()+"]");
 		
