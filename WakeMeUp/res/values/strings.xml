@@ -1,32 +1,41 @@
 <resources>
 
     <string name="app_name">WakeMeUp</string>
-    <string name="app_tips">Be sure to set your contact name and alarm tone on your first time installing the app before you start the application</string>
-    <string name="app_about">This application was created by AppSomnia !\nYour opinion really matters to us so please let us know how we can improve it to suit your lifestyle.</string>
-    
+    <string name="app_tips">Be sure to set your VIP Contact and Alarm Tone before starting the service</string>
+    <string name="app_about">To all you heavy sleepers out there, 
+this app is for your friends ! All you have to do is set a VIP Contact and your preferred Alarm Tone,
+then let this system work its magic !\n\n
+Your opinion really matters to us so please let us know how we can improve it to suit your lifestyle.\n\n
+This application was created by AppSomnia.</string>
+
     <string name="version_number">version_number</string>
     <string name="main_activity__button__start__str">Start</string>
     <string name="main_activity__button__stop__str">Stop</string>
-    <string name="alarm_configuration__button__save__str">Save</string>
-    <string name="alarm_configuration__button__alarm_stop__str">Stop Alarm</string>
-    <string name="alarm_configuration__textview__time__str">Time:</string>
-    <string name="alarm_configuration__textview__snooze__str">Snooze:</string>
-    <string name="alarm_configuration__textview__vip__str">VIP Contact:</string>
-    <string name="alarm_configuration__textview__vipOccurenceLimit__str">Number of Calls before alarm is set:</string>
-    <string name="alarm_configuration__textview__alarmRingtone__str">Alarm Tone:</string>
         
     <string name="alarm_preferences__toggleService">alarm_preferences__toggleService</string>
-    <string name="alarm_preferences__vip">alarm_preferences__vip</string>
-    <string name="alarm_preferences__time">alarm_preferences__time</string>
-    <string name="alarm_preferences__snooze">alarm_preferences__snooze</string>
-    <string name="alarm_preferences__alarmTone">alarm_preferences__alarmTone</string>
-    <string name="alarm_preferences__alarmToneTemp">alarm_preferences__alarmToneTemp</string>
-    
-    <string name="alarm_preferences__vipOccurrence">alarm_preferences__vipOccurrence</string>
+    <string name="alarm_preferences__toggleService__str">Activate Service</string>
+    <string name="alarm_preferences__toggleService__summary">Start WakeMeUp service</string>
     <string name="alarm_preferences__vipOccurrenceLimit">alarm_preferences__vipOccurrenceLimit</string>
-    
-    <string name="alarm_preferences__vip_id">alarm_preferences__vip_id</string>
+    <string name="alarm_preferences__vipOccurrenceLimit__str">Number of missed calls</string>
+    <string name="alarm_preferences__vipOccurrenceLimit__summary">Set the number of times that the vip contact will have to call before the alarm is set</string>
     <string name="alarm_preferences__vip_name">alarm_preferences__vip_name</string>
+    <string name="alarm_preferences__vip_name__str">VIP Contact</string>
+    <string name="alarm_preferences__vip_name__summary">Select the contact who will trigger your phone alarm</string>
+    <string name="alarm_preferences__alarmTone">alarm_preferences__alarmTone</string>
+    <string name="alarm_preferences__alarmTone__str">Alarm Tone</string>
+    <string name="alarm_preferences__alarmTone__summary">Choose the alarm tone</string>
+    <string name="alarm_preferences__time">alarm_preferences__time</string>
+    <string name="alarm_preferences__time__str">Alarm Time</string>
+    <string name="alarm_preferences__time__summary">Set the number of minutes that will pass before the alarm is triggered</string>
+    <string name="alarm_preferences__snooze">alarm_preferences__snooze</string>
+    <string name="alarm_preferences__snooze__str">Snooze Time</string>
+    <string name="alarm_preferences__snooze__summary">Set the number of minutes before an alarm is triggered again</string>
+    
+    <string name="alarm_preferences__alarmToneTemp">alarm_preferences__alarmToneTemp</string>
+    <string name="alarm_preferences__vipOccurrence">alarm_preferences__vipOccurrence</string>
+    
+    <string name="alarm_preferences__vip">alarm_preferences__vip</string>
+    <string name="alarm_preferences__vip_id">alarm_preferences__vip_id</string>
     <string name="alarm_preferences__vip_callTime">alarm_preferences__vip_callTime</string>
     <string name="alarm_preferences__vip_contactList">alarm_preferences__vip_contactList</string>
     

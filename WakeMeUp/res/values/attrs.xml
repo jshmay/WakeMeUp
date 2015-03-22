@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="com.sunapps.wakemeup.util.preferences.NumberPickerPreference">
+    <declare-styleable name="com.appsomnia.wakemeup.util.preferences.NumberPickerPreference">
         <attr name="minValue" format="integer" />
         <attr name="maxValue" format="integer" />
     </declare-styleable>

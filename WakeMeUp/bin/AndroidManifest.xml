@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sunapps.wakemeup"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    package="com.appsomnia.wakemeup"
+    android:versionCode="2"
+    android:versionName="1.5" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -21,23 +21,23 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo" >
         
-        <activity android:name="com.sunapps.wakemeup.MainActivity">
+        <activity android:name="com.appsomnia.wakemeup.MainActivity">
              <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>           
         </activity>
         
-        <activity android:name="com.sunapps.wakemeup.AlarmSettingsActivity"
+        <activity android:name="com.appsomnia.wakemeup.AlarmSettingsActivity"
             android:label="@string/alarmSettingsActivity_label_str"      
-        android:parentActivityName="com.sunapps.wakemeup.MainActivity" >
+        android:parentActivityName="com.appsomnia.wakemeup.MainActivity" >
         <!-- Parent activity meta-data to support 4.0 and lower -->
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="com.sunapps.wakemeup.MainActivity" />              
         </activity>        
-        <service android:name="com.sunapps.wakemeup.services.MainService" android:enabled="true" android:exported="false"/>
-        <activity android:name="com.sunapps.wakemeup.AlarmReceiverActivity"/>
+        <service android:name="com.appsomnia.wakemeup.services.MainService" android:enabled="true" android:exported="false"/>
+        <activity android:name="com.appsomnia.wakemeup.AlarmReceiverActivity"/>
     </application>
 
     
